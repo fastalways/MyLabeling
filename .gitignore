@@ -4,8 +4,8 @@
 /RecycleWasteDatasetCropped/plastic/*
 /RecycleWasteDatasetYolo/data/train/*
 
-!/RecycleWasteDatasetCropped/glass/
-!/RecycleWasteDatasetCropped/metal/
-!/RecycleWasteDatasetCropped/paper/
-!/RecycleWasteDatasetCropped/plastic/
-!/RecycleWasteDatasetYolo/data/train/
+!/RecycleWasteDatasetCropped/glass/.gitkeep
+!/RecycleWasteDatasetCropped/metal/.gitkeep
+!/RecycleWasteDatasetCropped/paper/.gitkeep
+!/RecycleWasteDatasetCropped/plastic/.gitkeep
+!/RecycleWasteDatasetYolo/data/train/.gitkeep
