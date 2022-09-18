@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import os
 from os import listdir
-from os.path import isfile, join
+from os.path import isfile, join, exists
 import re
 import copy
 
@@ -64,8 +64,17 @@ def makeLabelYOLO(xywh,nameClass,IMAGE_WIDTH,IMAGE_HEIGHT):
 
 def main():
     numIMG = 0
-    # Read GLabel *.anno file
     global DIRs,DIR_to_save,SAVE_IMAGE_EXTENSION
+    # Create classes.txt
+    path_classes_txt = DIR_to_save+'classes.txt'
+    if not os.path.exists(path_classes_txt):
+        classesFile = open(path_classes_txt, "a+")
+        print("classes.txt not exits -> writing... "+path_classes_txt)
+        for key in dictLabel:
+            n = classesFile.write(key+'\n')
+            print(f"->{key}")
+        classesFile.close()
+    # Read GLabel *.anno file
     for DIR in DIRs: # access in each path (DIR)
         print(f"Enter to process in  -------->  {DIR}")
         for name_folder in os.listdir(DIR): # access each image/label in a path (DIR)
