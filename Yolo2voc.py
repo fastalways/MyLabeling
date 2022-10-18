@@ -32,7 +32,7 @@ txt_img_folder = 'train'
 xml_folder = 'voc_outputs'
 
 display_xml = False
-num_show_progress = 2
+num_show_progress = 5
 ROOT = fullpath + '/' + txt_img_folder
 ## converts the normalized positions  into integer positions
 def unconvert(class_id, width, height, x, y, w, h):
@@ -68,10 +68,10 @@ def xml_transform(root, classes):
     outpath = join(root, xml_folder, '%s.xml')
 
     print(f'Found yolo txt label : {len(ids)} files ...\n-Will save xml at {outpath}\nStrating to convert...')
-
+    numLabel=len(ids)
     for i in range(len(ids)):
-        if i%num_show_progress == 0:
-            print(f"    Proceeded {i}/{len(ids)}")
+        if i%num_show_progress == 0 or i+1==numLabel:
+            print(f"    Proceeded {i+1}/{len(ids)}")
 
         img_id = ids[i] 
         if img_id == "classes":
