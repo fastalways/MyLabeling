@@ -117,7 +117,7 @@ def ProcessInEachFolder():
             #print(save_crop_image_path)
             if((cropped_image!=None).any()):
                 if save_img_extension == 'jpg':
-                    cv.imwrite(save_crop_image_path,cropped_image,[int(cv.IMWRITE_JPEG_QUALITY), 95])
+                    cv.imwrite(save_crop_image_path,cropped_image,[int(cv.IMWRITE_JPEG_QUALITY), 100])
                 else :
                     cv.imwrite(save_crop_image_path,cropped_image)
             else:

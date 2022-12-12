@@ -285,7 +285,7 @@ def ProcessInEachFolder():
             croppedPosFile.close()
             if(WRITE_IMAGE_OUTPUT):
                 if save_img_extension == 'jpg':
-                    cv.imwrite(img_crop_path+imgName+'.'+save_img_extension,cropped_image,[int(cv.IMWRITE_JPEG_QUALITY), 95])
+                    cv.imwrite(img_crop_path+imgName+'.'+save_img_extension,cropped_image,[int(cv.IMWRITE_JPEG_QUALITY), 100])
                 else :
                     cv.imwrite(img_crop_path+imgName+'.'+save_img_extension,cropped_image)
 
