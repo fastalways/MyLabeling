@@ -237,6 +237,10 @@ while(True):
         cv.putText(show_original_image, imgName, putNamePos, cv.FONT_HERSHEY_SIMPLEX, textSize, (0,0,255),textThickness)
         temp_show_original_image = show_original_image.copy()
         marked_cvRects,marked_Label = loadLabelsFromFile()
+        marked_Label_count = 0
+        marked_Label_count = len(marked_Label)
+        putLabel_count = (20,400)
+        cv.putText(show_original_image,str(marked_Label_count), putLabel_count, cv.FONT_HERSHEY_SIMPLEX, textSize, (0,0,255),textThickness)
         for idx,marked_cvRect in enumerate(marked_cvRects):
             xc,yc,wc,hc = marked_cvRect.xywh()
             cv.rectangle(show_original_image, (xc,yc), (xc+wc,yc+hc), (0,0,255),4)
