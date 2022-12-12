@@ -51,6 +51,7 @@ waste_name_list = [
 ]
 
 WRITE_IMAGE_OUTPUT = True
+save_img_extension = 'jpg' # jpg png bmp ....
 waste_name = waste_name_list[0]
 dataset_path = 'D:/DatasetMedicalWaste/'
 dataset_crop_path = 'D:/DatasetMedicalWasteCropped/'
@@ -283,7 +284,11 @@ def ProcessInEachFolder():
             n = croppedPosFile.write(croppedPosString)
             croppedPosFile.close()
             if(WRITE_IMAGE_OUTPUT):
-                 cv.imwrite(img_crop_path+imgName+'.png',cropped_image)
+                if save_img_extension == 'jpg':
+                    cv.imwrite(img_crop_path+imgName+'.'+save_img_extension,cropped_image,[int(cv.IMWRITE_JPEG_QUALITY), 95])
+                else :
+                    cv.imwrite(img_crop_path+imgName+'.'+save_img_extension,cropped_image)
+
 
             #cv.imwrite(img_path+"/seg/"+fname+"_segment.jpg",imgs[i])
             #cv.imwrite(img_path+"/seg/"+fname+"_segment.png",locateBG_imgs[i])
