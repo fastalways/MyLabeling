@@ -240,7 +240,7 @@ def ProcessInEachFolder():
             cropped_image = jimg[xywh.y:xywh.y+xywh.h ,xywh.x:xywh.x+xywh.w]
             croppedPosString = Label + '\t' + str(xywh.x) + '\t' + str(xywh.y) +'\t' + str(xywh.w) + '\t' + str(xywh.h) # x   y   w   h
             imgName,imgExtension = os.path.splitext(fname)
-            croppedPosFile = open(img_path+imgName+".txt", "w")
+            croppedPosFile = open(img_path+imgName+".anno", "w")
             n = croppedPosFile.write(croppedPosString)
             croppedPosFile.close()
             if(WRITE_IMAGE_OUTPUT):
