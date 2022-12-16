@@ -7,59 +7,19 @@ from os.path import isfile, join, exists
 import copy
 
 waste_name_list = [
-    # '1WayConnectorforFoley',
-    # '2WayConnectorforFoley',
-    # '2WayFoleyCatheter',
-    # '3WayConnectorforFoley',
-    # '3Waystopcock',
-    # 'AlcoholBottle',
-    # 'AlcoholPad',
-    # 'BootCover',
-    # 'CottonBall',
-    # 'CottonSwap',
-    # 'Dilator',
-    # 'DisposableInfusionSet',
-    # 'ExtensionTube',
-    # 'FaceShield',
-    # 'FrontLoadSyringe',
-    # 'GauzePad',
-    # 'Glove',
-    # 'GuideWire',
-    # 'LiquidBottle',
-    # 'Mask',
-    # 'NasalCannula',
-    # 'Needle',
-    # 'NGTube',
-    # 'OxygenMask',
-    # 'PharmaceuticalProduct',
-    # 'Pill',
-    # 'PillBottle',
-    # 'PPESuit',
-    # 'PrefilledHumidifier',
-    # 'PressureConnectingTube',
-    # 'ReusableHumidifier',
-    # 'SodiumChlorideBag',
-    # 'SterileHumidifierAdapter',
-    # 'SurgicalBlade',
-     'SurgicalCap',
-    # 'SurgicalSuit',
-    # 'Syringe',
-    # 'TrachealTube',
-    # 'UrineBag',
-    # 'Vaccinebottle',
-    # 'WingedInfusionSet',
+    'AluminiumCan',
 ]
-
-WRITE_IMAGE_OUTPUT = True
+Label = 'Can'
+WRITE_IMAGE_OUTPUT = False
 save_img_extension = 'jpg' # jpg png bmp ....
 waste_name = waste_name_list[0]
-dataset_path = 'D:/DatasetMedicalWaste/'
+dataset_path = 'D:/RecycleWasteDataset/test/Can/'
 dataset_crop_path = 'D:/DatasetMedicalWasteCropped/'
 alpha_value = .7 # 0.1-1
 
 
-img_path = dataset_path + waste_name + '/'
-img_crop_path = dataset_crop_path + waste_name + '/'
+img_path = dataset_path 
+img_crop_path = dataset_crop_path 
 
 mean_black = np.array([26,11,53])
 mean_white = np.array([50,13,117])
@@ -278,7 +238,7 @@ def ProcessInEachFolder():
             br_point = (xywh.x+xywh.w,xywh.y+xywh.h)
             #cv.rectangle(imgs[m],tl_point,br_point,(0,255,0),2) # (x,y),(x+w,y+h)
             cropped_image = jimg[xywh.y:xywh.y+xywh.h ,xywh.x:xywh.x+xywh.w]
-            croppedPosString = str(xywh.x) + '\t' + str(xywh.y) +'\t' + str(xywh.w) + '\t' + str(xywh.h) # x   y   w   h
+            croppedPosString = Label + '\t' + str(xywh.x) + '\t' + str(xywh.y) +'\t' + str(xywh.w) + '\t' + str(xywh.h) # x   y   w   h
             imgName,imgExtension = os.path.splitext(fname)
             croppedPosFile = open(img_path+imgName+".txt", "w")
             n = croppedPosFile.write(croppedPosString)
@@ -301,8 +261,9 @@ def main():
         waste_name = name
         img_path = dataset_path + waste_name + '/'
         img_crop_path = dataset_crop_path + waste_name + '/'
-        if not os.path.exists(img_crop_path): # เช็คว่า path existed ?
-            os.mkdir(img_crop_path)
+        if WRITE_IMAGE_OUTPUT:
+            if not os.path.exists(img_crop_path): # เช็คว่า path existed ?
+                os.mkdir(img_crop_path)
         print(f'Processing in Folder : {waste_name}')
         ProcessInEachFolder()
     print('------------------------------Finished---------------------------------')
