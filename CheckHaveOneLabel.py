@@ -12,7 +12,7 @@ import re
 
 
 save_img_extension = 'jpg' # jpg png bmp ....
-dataset_path = 'D:/RecycleWasteDataset/test/Paper/CardboardBox/'
+dataset_path = 'D:/RecycleWasteDataset/test/Paper/MilkBox/'
 img_path = dataset_path
 TrueLabel = "Paper"
 

@@ -7,7 +7,7 @@ from os import listdir,mkdir
 from os.path import isfile, join, exists
 import copy
 import re
-
+import glob
 
 '''  Label Listing  '''
 label_name_list = [
@@ -17,14 +17,19 @@ label_name_list = [
     'plastic',
 ]
 
-save_img_extension = 'jpg' # jpg png bmp ....
-dataset_path = './RecycleWasteDataset/glass/'
+save_img_extension = 'png' # jpg png bmp ....
+dataset_path = './RecycleWasteDataset/plastic/'
 dataset_output_crop_path = './RecycleWasteDatasetCropped/'
 img_path = dataset_path + '/'
 img_crop_path = dataset_output_crop_path + '/'
 paddingVertical = 0
 paddingHorizontal = 0
 countingList = [1] * len(label_name_list)
+
+## Load latest countingList
+for i,label in enumerate(label_name_list):
+    path_label = dataset_output_crop_path + label
+    countingList[i] = len(glob.glob1(path_label,"*."+save_img_extension))+1
 
 class cvRect:
     def __init__(self, xywh):
@@ -83,14 +88,23 @@ def ProcessInEachFolder():
         single_image_name = img_path+fname
         single_image_name = single_image_name[0:len(single_image_name)-5]
         single_image_path_jpg = single_image_name + '.jpg'
+        single_image_path_jpeg = single_image_name + '.jpeg'
         single_image_path_png = single_image_name + '.png'
+        single_image_path_bmp = single_image_name + '.bmp'
         single_image_path_JPG_BIG = single_image_name + '.JPG'
+        single_image_path_JPEG_BIG = single_image_name + '.JPEG'
         if(os.path.isfile(single_image_path_jpg)):
             single_image_path = single_image_path_jpg
+        elif (os.path.isfile(single_image_path_jpeg)):
+            single_image_path = single_image_path_jpeg
         elif (os.path.isfile(single_image_path_png)):
             single_image_path = single_image_path_png
+        elif (os.path.isfile(single_image_path_bmp)):
+            single_image_path = single_image_path_bmp
         elif (os.path.isfile(single_image_path_JPG_BIG)):
             single_image_path = single_image_path_JPG_BIG
+        elif (os.path.isfile(single_image_path_JPEG_BIG)):
+            single_image_path = single_image_path_JPEG_BIG
         else :
             print(f'Cannot found image : {single_image_name}')
             continue # if not found images

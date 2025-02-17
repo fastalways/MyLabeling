@@ -2,8 +2,8 @@ import os
 import glob
 
 ## -------------- CONFIG HERE ---------------------
-DIR = "E:/eieie/"
-ALLOW_IMAGE_TYPE = ['txt']
+DIR = "./path_to_rename/"
+ALLOW_IMAGE_TYPE = ['jpg','jpeg','bmp','png']
 ## ------------------------------------------------
 
 

@@ -7,14 +7,21 @@ from os.path import isfile, join, exists
 import re
 import copy
 
-from numpy.lib.shape_base import split
+
+# CAUTION !!!!!! Path must seperate only by slash -> "/" e.g. ./my_car_dataset/
 DIRs = ["./RecycleWasteDataset/"] # TrainSet
 DIR_to_save = "./RecycleWasteDatasetYolo/data/train/"
 
 
 
 SAVE_IMAGE_EXTENSION = "png"
-TEST_MODE = False # True->write on disk False->only testing
+# ---------------------------------- vvvvv -------------------------------------------
+TEST_MODE = False # False->write on disk True->only testing
+# ---------------------------------- ^^^^^ -------------------------------------------
+# ---------------------------------- ^^^^^ -------------------------------------------
+# ---------------------------------- ^^^^^ -------------------------------------------
+# ---------------------------------- ^^^^^ -------------------------------------------
+# ---------------------------------- ^^^^^ -------------------------------------------
 class cvRect:
     def __init__(self, xywh):
         self.x = xywh[0]
@@ -42,6 +49,7 @@ dictLabel = {
     'paper':2,
     'plastic':3,
 }
+
 def makeLabelYOLO(xywh,nameClass,IMAGE_WIDTH,IMAGE_HEIGHT):
     ''' makeLabelYOLO(xywh<-cvRect,nameClass<-string,IMAGE_SIZE<-numpy.shape())
     '''
@@ -78,7 +86,7 @@ def main():
     for DIR in DIRs: # access in each path (DIR)
         print(f"Enter to process in  -------->  {DIR}")
         for name_folder in os.listdir(DIR): # access each image/label in a path (DIR)
-            print(f'Working in {name_folder}')
+            print(f'Enter in DIR -> {name_folder}')
             if os.path.isdir(os.path.join(DIR, name_folder)):
                 for name in os.listdir(DIR+name_folder): ## in each folder
                     #print(f'Working in {name}')
@@ -93,7 +101,6 @@ def main():
                                 aImagePath = ""
                                 prefixImagePath = filename
                                 jpgImagePath = prefixImagePath + '.jpg'
-                                #print(jpgImagePath)
                                 if os.path.exists(jpgImagePath):
                                     aImagePath = jpgImagePath
                                     found_image = True
@@ -101,9 +108,29 @@ def main():
                                 if os.path.exists(JPGImagePath):
                                     aImagePath = JPGImagePath
                                     found_image = True
+                                jpegImagePath = prefixImagePath + '.jpeg'
+                                if os.path.exists(jpegImagePath):
+                                    aImagePath = jpegImagePath
+                                    found_image = True
+                                JPEGImagePath = prefixImagePath + '.JPEG'
+                                if os.path.exists(JPEGImagePath):
+                                    aImagePath = JPEGImagePath
+                                    found_image = True
                                 pngImagePath = prefixImagePath + '.png'
                                 if os.path.exists(pngImagePath):
                                     aImagePath = pngImagePath
+                                    found_image = True
+                                PNGImagePath = prefixImagePath + '.PNG'
+                                if os.path.exists(PNGImagePath):
+                                    aImagePath = PNGImagePath
+                                    found_image = True
+                                bmpImagePath = prefixImagePath + '.bmp'
+                                if os.path.exists(bmpImagePath):
+                                    aImagePath = bmpImagePath
+                                    found_image = True
+                                BMPImagePath = prefixImagePath + '.BMP'
+                                if os.path.exists(BMPImagePath):
+                                    aImagePath = BMPImagePath
                                     found_image = True
                                 if(found_image):
                                     IMG = cv.imread(aImagePath)
@@ -142,7 +169,7 @@ def main():
                                                         print(f"{xywh_str[0]}-{xywh_str[1]}-{xywh_str[2]}-{xywh_str[3]}-{xywh_str[4]}")
                                                 else:
                                                     print(f'txt pos error in {full_filename}')
-                                                    print(f"{xywh_str[0]}-{xywh_str[1]}-{xywh_str[2]}-{xywh_str[3]}-{xywh_str[4]}")
+                                                    #print(f"{xywh_str[0]}-{xywh_str[1]}-{xywh_str[2]}-{xywh_str[3]}-{xywh_str[4]}")
                                             ### write yolo label .txt
                                             if(not TEST_MODE):
                                                 f = open(abs_path_to_save+'.txt', "w")
@@ -155,6 +182,9 @@ def main():
                                     print("Couldn't find image !!! (support: JPG/jpg/png)")
                                     print(f"Pls check at {full_filename}")
     print("Finished!!!!")
+    if (TEST_MODE):
+        print("You run on [Test Mode] || Output will not write to disk!!")
+        print("IF YOU WANT TO RUN REAL MODE - PLEASE SET VARIABLE TEST_MODE = False")
 
 
 
